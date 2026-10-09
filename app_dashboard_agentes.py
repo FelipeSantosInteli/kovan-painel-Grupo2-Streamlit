@@ -301,7 +301,7 @@ if arquivo_upload is not None:
                                     st.markdown(msg["content"])
                     
                     # Campo de input de chat na parte inferior
-                    if prompt := st.chat_input("Pergunte sobre a fila, uma conta ou o plano de uma área..."):
+                    if prompt := st.chat_input(f"{selected_account} Pergunte sobre a fila, uma conta ou o plano de uma área..."):
                         if not endpoint_n8n:
                             st.warning("⚠️ Por favor, configure o Endpoint do Webhook primeiro.")
                         else:
@@ -357,7 +357,18 @@ if arquivo_upload is not None:
                                     "contas_elegiveis": len(df_recorrentes), 
                                     "capacidade_do_ciclo": len(contas_formatadas)
                                 },
-                                "contas_gerais_fila": contas_formatadas,
+                                "modelo": {
+                                    "contas_elegiveis": len(df_recorrentes), 
+                                    "capacidade_do_ciclo": len(contas_formatadas),
+                                    
+                                    # --- NOVOS DADOS PARA O ATLAS RESPONDER SOBRE O GERAL ---
+                                    # Puxando as variáveis que foram calculadas no Módulo 1 do Dashboard
+                                    "receita_total_12m_usd": round(receita_total_anual, 2),
+                                    "receita_em_risco_usd": round(receita_em_risco, 2),
+                                    "total_contas_em_risco": int(len(df_contas_risco)),
+                                    "nrr_b2b_percentual": round(nrr_estimada, 2)
+                                },
+                                "contas": contas_formatadas,
                                 "planos": {
                                     "comercial": plano_comercial,
                                     "atendimento": plano_atendimento,
@@ -369,7 +380,7 @@ if arquivo_upload is not None:
                             with chat_container:
                                 with st.spinner("A equipe (Atlas, Vera e Ciro) está analisando..."):
                                     try:
-                                        resposta = requests.post(endpoint_n8n, json=payload, timeout=120)
+                                        resposta = requests.post(endpoint_n8n, json=payload, timeout=10000)
                                         resposta.raise_for_status()
                                         dados = resposta.json()
                                         
