@@ -277,7 +277,7 @@ if arquivo_upload is not None:
 
                 with col_config:
                     st.markdown("#### Configurações (Card 3)")
-                    endpoint_n8n = st.text_input("Endpoint do Webhook (n8n)", placeholder="https://...")
+                    endpoint_n8n = st.text_input("Endpoint do Webhook (n8n)", placeholder="https://inteli.app.n8n.cloud/webhook/kovan-chat-Grupo2_v2")
                     modelo_llm = st.selectbox(
                         "Modelo de Linguagem", 
                         ["nvidia/nemotron-3-super-120b-a12b:free", "qwen/qwen3.8-27b:free", "anthropic/claude-sonnet-5.5"]
