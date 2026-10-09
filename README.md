@@ -26,6 +26,7 @@ Uma pasta chamada _venv_ irá aparecer no diretório. Nela (geralmente em /bin o
 
 Se tudo der certo, na linha de execução do seu terminal aparecerá a palavra _venv_ indicando que ele está sendo executado dentro do ambiente virtual.
 
+É possivel desativar o ambiente virtual por meio do comando _deactivate_
 ___
 
 ### Instalando requirements
