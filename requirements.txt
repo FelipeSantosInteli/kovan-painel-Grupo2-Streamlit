@@ -7,3 +7,5 @@ numpy
 py_mini_racer
 
 plotly
+
+openpyxl
